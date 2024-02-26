@@ -8,7 +8,7 @@ class CarrinhoController extends Controller
 {
     public function carrinhoLista() {
         $itens = \Cart::getContent();
-        return  view('site.carrinho', compact('itens'));
+        return view('site.carrinho', compact('itens'));
     }
 
     public function adicionaCarrinho(Request $request) {
@@ -16,7 +16,7 @@ class CarrinhoController extends Controller
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
-            'quantity' => $request->qnt,
+            'quantity' => abs($request->qnt),
             'attributes' => array(
                 'image' => $request->img
             )            
@@ -33,7 +33,7 @@ class CarrinhoController extends Controller
         \Cart::update($request->id,[           
             'quantity' => [
                 'relative' => false,
-                'value' => $request->quantity,
+                'value' => abs($request->quantity),
             ]
         ]);
         return redirect()->route('site.carrinho')->with('sucesso','Produto atualizado com sucesso!');

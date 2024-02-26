@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\LoginController;
+//use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\DashboardController;
 
 Route::resource('produtos', ProdutoController::class);
 
@@ -19,4 +22,7 @@ Route::post('/remover', [CarrinhoController::class, 'removeCarrinho'])->name('si
 Route::post('/atualizar', [CarrinhoController::class, 'atualizaCarrinho'])->name('site.atualizacarrinho');
 Route::get('/limpar', [CarrinhoController::class, 'limparCarrinho'])->name('site.limparcarrinho');
 
+Route::view('/login','login.form')->name('login.form');
+Route::post('/auth',[loginController::class, 'auth'])->name('login.auth');
 
+Route::get('/admin/dashboard',[DashboardController::class, 'index'])->name('admin.dashboard');
