@@ -1,8 +1,9 @@
 @extends('site/layout')
-@section('title','Este é o título da Página Home')
+@section('title','Este é o título da Página Categoria')
 @section('conteudo')
 
 <div class="row container">
+  <h4>Categoria: {{$categoria->nome}}</h4>
   @foreach ($produtos as $produto)
     <div class="col s12 m4">
       <div class="card">
