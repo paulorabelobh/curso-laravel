@@ -11,7 +11,7 @@ class CarrinhoController extends Controller
         return  view('site.carrinho', compact('itens'));
     }
 
-    public function adicionaLista(Request $request) {
+    public function adicionaCarrinho(Request $request) {
         \Cart::add([
             'id' => $request->id,
             'name' => $request->name,
@@ -21,7 +21,28 @@ class CarrinhoController extends Controller
                 'image' => $request->img
             )            
         ]);
+        return redirect()->route('site.carrinho')->with('sucesso','Produto adicionado com sucesso!');
     }
-    
+
+    public function removeCarrinho(Request $request) {
+        \Cart::remove($request->id);
+        return redirect()->route('site.carrinho')->with('sucesso','Produto removido do com sucesso!');
+    }
+
+    public function atualizaCarrinho(Request $request) {
+        \Cart::update($request->id,[           
+            'quantity' => [
+                'relative' => false,
+                'value' => $request->quantity,
+            ]
+        ]);
+        return redirect()->route('site.carrinho')->with('sucesso','Produto atualizado com sucesso!');
+    }
+
+    public function limparCarrinho() {
+        \Cart::clear();            
+        return redirect()->route('site.carrinho')->with('aviso','Seu está vazio!');
+    }
+
 }
 
