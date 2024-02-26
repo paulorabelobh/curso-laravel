@@ -7,6 +7,9 @@ use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\LoginController;
 //use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+
+Route::resource('users', UserController::class);
 
 Route::resource('produtos', ProdutoController::class);
 
@@ -24,5 +27,7 @@ Route::get('/limpar', [CarrinhoController::class, 'limparCarrinho'])->name('site
 
 Route::view('/login','login.form')->name('login.form');
 Route::post('/auth',[loginController::class, 'auth'])->name('login.auth');
+Route::get('/logout',[loginController::class, 'logout'])->name('login.logout');
+Route::get('/register',[loginController::class, 'create'])->name('login.create');
 
-Route::get('/admin/dashboard',[DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/dashboard',[DashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth','checkemail']);

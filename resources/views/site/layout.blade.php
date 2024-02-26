@@ -10,22 +10,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <body>
-  
-    <!-- menu dropdown -->
+   
+    <!-- menu dropdown 1 -->
     <ul id='dropdown1' class='dropdown-content'>
         @foreach ($categoriasMenu as $categoriaMenu)
             <li><a href="{{ route('site.categoria',$categoriaMenu->id) }}">{{ $categoriaMenu->nome }}</a></li>
         @endforeach
     </ul>
 
+    <!-- menu dropdown 2 -->
+    <ul id='dropdown2' class='dropdown-content'>
+        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ route('login.logout') }}">Sair</a></li>
+    </ul>
+
     <nav class="red">
       <div class="rednav-wrapper container">
         <a href="#" class="brand-logo center">Curso Laravel</a>
+
         <ul id="nav-mobile" class="left">
           <li><a href="{{ route('site.index') }}">Home</a></li>
           <li><a href="#" class="dropdown-trigger" data-target="dropdown1">Categorias <i class="material-icons right">expand_more</i></a></li>
           <li><a href=" {{ route('site.carrinho')}}">Carrinho <span class="new badge blue" data-badge-caption="">{{\Cart::getContent()->count()}}</span></a></li>
         </ul>
+
+        <ul id="nav-mobile" class="right">
+        @auth
+          <li><a href="#" class="dropdown-trigger" data-target="dropdown2">Olá {{ auth()->user()->firstname }} <i class="material-icons right">expand_more</i></a></li>
+        @else
+          <li><a href="{{ route('login.form') }}"> Login <i class="material-icons right">lock</i></a></li>
+        @endauth
+        </ul>    
+
       </div>
     </nav>
 
