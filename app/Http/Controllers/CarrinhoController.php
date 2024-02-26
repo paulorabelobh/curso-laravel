@@ -8,7 +8,7 @@ class CarrinhoController extends Controller
 {
     public function carrinhoLista() {
         $itens = \Cart::getContent();
-        dd($itens);
+        return  view('site.carrinho', compact('itens'));
     }
 
     public function adicionaLista(Request $request) {
@@ -17,11 +17,11 @@ class CarrinhoController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->qnt,
-            'atributes' => array(
+            'attributes' => array(
                 'image' => $request->img
             )            
         ]);
-
     }
+    
 }
 
