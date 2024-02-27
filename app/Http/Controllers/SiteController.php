@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Produto;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Gate;
 
 class SiteController extends Controller
 {
@@ -18,9 +19,9 @@ class SiteController extends Controller
     public function details($id)
     {
         $produto = Produto::where('id',$id)->first();
+        Gate::authorize('ver-produto', $produto);
         return view('site/details', compact('produto'));
     }
-
 
     public function categoria($id)
     {
@@ -30,3 +31,4 @@ class SiteController extends Controller
     } 
 
 }
+ 
