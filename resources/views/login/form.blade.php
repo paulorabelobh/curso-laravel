@@ -12,5 +12,6 @@
 @csrf
 Email: <input type="email" name="email"> <br>
 Senha: <input type="password" name="password"> <br>
+<input type="checkbox" name="remember"> Lembrar-me
 <button type="submit"'> Entrar </button>
 </form>

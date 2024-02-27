@@ -19,7 +19,7 @@ class LoginController extends Controller
             ]
         );
 
-        if (Auth::attempt($credenciais)) { // se consegui logar
+        if (Auth::attempt($credenciais,$request->remember)) { // se consegui logar
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');
         } else {
