@@ -8,7 +8,11 @@
       <div class="card">
         <div class="card-image">
           <img src="{{ $produto->imagem }}">
-          <a href="{{ route('site.details', $produto->id ) }}" class="btn-floating halfway-fab waves-effect waves-light red" title="Visualizar"><i class="material-icons">visibility</i></a>
+
+          @can('ver-produto', $produto)
+            <a href="{{ route('site.details', $produto->id ) }}" class="btn-floating halfway-fab waves-effect waves-light red" title="Visualizar"><i class="material-icons">visibility</i></a>
+          @endcan
+
         </div>
         <div class="card-content">
           <span class="card-title">{{ Str::limit($produto->nome,30) }}</span>
@@ -21,4 +25,5 @@
 <div class="row center">
     {{ $produtos->links() }}
 </div>
+
 @endsection
