@@ -9,9 +9,7 @@
         <div class="card-image">
           <img src="{{ $produto->imagem }}">
 
-          @can('ver-produto', $produto)
-            <a href="{{ route('site.details', $produto->id ) }}" class="btn-floating halfway-fab waves-effect waves-light red" title="Visualizar"><i class="material-icons">visibility</i></a>
-          @endcan
+          <a href="{{ route('site.details', $produto->id ) }}" class="btn-floating halfway-fab waves-effect waves-light red" title="Visualizar"><i class="material-icons">visibility</i></a>
 
         </div>
         <div class="card-content">
