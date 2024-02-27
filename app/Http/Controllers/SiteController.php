@@ -19,7 +19,8 @@ class SiteController extends Controller
     public function details($id)
     {
         $produto = Produto::where('id',$id)->first();
-        Gate::authorize('ver-produto', $produto);
+        //Gate::authorize('ver-produto', $produto);
+        $this->authorize('ver-produto',$produto);
         return view('site/details', compact('produto'));
     }
 
